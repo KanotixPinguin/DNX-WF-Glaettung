@@ -1,0 +1,228 @@
+/* DNX Wasserfall-Glaettung (Teppich- & Schraegstrich-Filter) v1.2.0 */
+#dnx-master-wfglaettung {
+  position: relative;
+  gap: 5px;
+}
+#dnx-master-wfglaettung .dnx-wfg-lbl {
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#dnx-master-wfglaettung .dnx-wfg-gear,
+#dnx-wfg-standalone .dnx-wfg-gear {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.85;
+  background-color: rgba(0, 0, 0, 0.25);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11px 11px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E");
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+}
+#dnx-master-wfglaettung .dnx-wfg-gear:hover,
+#dnx-wfg-standalone .dnx-wfg-gear:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.24);
+  transform: rotate(30deg);
+}
+
+#dnx-wfg-standalone {
+  position: fixed;
+  right: 14px;
+  bottom: 48px;
+  z-index: 999980;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: #666666;
+  color: #ffffff;
+  font: 700 11.5px/1 "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+#dnx-wfg-standalone.an {
+  background: #1f8f52;
+  border-color: #67e6a3;
+  color: #f2fff8;
+}
+
+#dnx-wfg-panel {
+  position: fixed;
+  right: 18px;
+  top: 98px;
+  z-index: 2147483647 !important;
+  width: 304px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(78, 224, 138, 0.45);
+  background: rgba(11, 17, 24, 0.96);
+  color: #e6f2ec;
+  font: 12px/1.38 "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(8px);
+  display: none;
+  user-select: none;
+}
+#dnx-wfg-panel.open {
+  display: block;
+}
+.dnx-wfg-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 11px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(25, 58, 42, 0.42);
+  border-radius: 10px 10px 0 0;
+  cursor: move;
+}
+.dnx-wfg-hd-title {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #7df0b0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dnx-wfg-ver {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(125, 240, 176, 0.14);
+  color: #a5f3c8;
+  border: 1px solid rgba(125, 240, 176, 0.25);
+}
+.dnx-wfg-close {
+  border: none;
+  background: transparent;
+  color: #a4b9ae;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.dnx-wfg-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+.dnx-wfg-bd {
+  padding: 10px 12px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dnx-wfg-toggle-btn {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #333c44;
+  color: #f0f4f2;
+  font: 700 12px/1.2 "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.dnx-wfg-toggle-btn.an {
+  background: #1f8f52;
+  border-color: #5ee39a;
+  color: #ffffff;
+}
+.dnx-wfg-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  font-size: 11px;
+}
+.dnx-wfg-stat-k {
+  color: #93aca0;
+  display: block;
+  font-size: 10px;
+}
+.dnx-wfg-stat-v {
+  color: #ebf7f1;
+  font-weight: 700;
+  font-size: 11.5px;
+}
+.dnx-wfg-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.dnx-wfg-row-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: #cfe0d7;
+}
+.dnx-wfg-row-val {
+  font-weight: 700;
+  color: #7df0b0;
+}
+.dnx-wfg-panel-rng {
+  width: 100%;
+  accent-color: #29b569;
+  cursor: pointer;
+}
+.dnx-wfg-chk-grp {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 2px;
+}
+.dnx-wfg-chk {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: #cfe0d7;
+  cursor: pointer;
+}
+.dnx-wfg-chk input {
+  accent-color: #29b569;
+  cursor: pointer;
+}
+.dnx-wfg-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.dnx-wfg-rst {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d6e4dc;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.dnx-wfg-rst:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.dnx-wfg-hint {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: #9bb1a6;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(255, 193, 7, 0.07);
+  border: 1px solid rgba(255, 193, 7, 0.22);
+}
